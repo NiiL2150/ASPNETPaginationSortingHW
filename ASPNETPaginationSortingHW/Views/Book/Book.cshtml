@@ -1,0 +1,14 @@
+﻿@{
+    ViewData["Title"] = Model.Title;
+}
+@model Book
+
+<div>
+    <h1>@Model.Title</h1>
+    <a href="@Url.Action("EditBook", "Book", new {id = Model.Id})" class="btn btn-primary">Edit book</a>
+    <a href="@Url.Action("DeleteBook", "Book", new {id = Model.Id})" class="btn btn-danger">Delete book</a>
+    <br />
+    <p>@Model.Price$</p>
+    <p>@Model.Pages pages</p>
+    <p>@Model.Description</p>
+</div>

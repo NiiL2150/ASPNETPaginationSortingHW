@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "Books";
+}
+@model AllBooksViewModel
+
+<style>
+div{
+    overflow: hidden;
+}
+</style>
+
+<div class="row">
+    <a class="btn btn-primary" href="@Url.Action("AddBook", "Book")">Add book</a>
+    <form asp-action="Books" asp-controller="Book" method="get">
+        <span>Show books per page: </span>
+    <input asp-for="OnPage" />
+    <br />
+    <span>Current page:</span>
+    <input asp-for="CurrentPage" />
+    <span>/@Model.TotalPages</span>
+    <br />
+    <select asp-for="OrderBy">
+        <option value="0">Id</option>
+        <option value="1">New</option>
+        <option value="2">Title asc</option>
+        <option value="3">Title desc</option>
+        <option value="4">Price asc</option>
+        <option value="5">Price desc</option>
+        <option value="6">Pages asc</option>
+        <option value="7">Pages desc</option>
+    </select>
+   <button type="submit" name="Submit">Refresh</button>
+   </form>
+    <p>Showing @((Model.CurrentPage-1)*Model.OnPage+1)-@(Math.Min(Model.CurrentPage*Model.OnPage, Model.Count)) out of @Model.Count books</p>
+    <p>Page @Model.CurrentPage of @Model.TotalPages</p>
+    @foreach(var item in Model.Items)
+    {
+         <div class="card col col-12 col-md-6 col-lg-4 col-xl-3 p-1">
+            <div class="card-body">
+                <h5 class="card-title">@item.Title</h5>
+                <p class="card-text">@item.Price$</p>
+                <p class="card-text">@item.Pages pages</p>
+                <a class="btn btn-primary" href="@Url.Action("Book", "Book", new {id=item.Id})">View more</a>
+                <a href="@Url.Action("DeleteBook", "Book", new {id = item.Id})" class="btn btn-danger">Delete book</a>
+                <br>
+            </div>
+        </div>
+    }
+</div>

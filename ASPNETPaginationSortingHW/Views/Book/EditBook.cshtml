@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = Model.Title;
+}
+@model Book
+
+<div>
+    <a href="@Url.Action("Book", "Book", new {id = Model.Id})" class="btn btn-secondary">Back</a>
+    <br>
+    <form asp-action="EditBook" asp-controller="Book" method="post" enctype="multipart/form-data">
+        <label asp-for="@Model.Id"></label>
+        <input asp-for="@Model.Id" readonly />
+        <br />
+        <label asp-for="@Model.Title"></label>
+        <input asp-for="@Model.Title" />
+        <br />
+        <label asp-for="@Model.Price"></label>
+        <input asp-for="@Model.Price" />
+        <br />
+        <label asp-for="@Model.Pages"></label>
+        <input asp-for="@Model.Pages" />
+        <br />
+        <label asp-for="@Model.Description"></label>
+        <input asp-for="@Model.Description" />
+        <br />
+        <button type="submit" name="Submit">Edit</button>
+    </form>
+</div>
